@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix India - Watch TV Shows Online, Watch Movies Online</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Additional Home Styles */
+        .trending-now {
+            position: relative;
+            height: 70vh;
+            margin-bottom: 50px;
+        }
+        
+        .trending-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        
+        .trending-content {
+            position: absolute;
+            bottom: 20%;
+            left: 4%;
+            max-width: 600px;
+        }
+        
+        .netflix-logo {
+            width: 150px;
+            margin-bottom: 30px;
+        }
+        
+        .hero-text {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.45);
+        }
+        
+        .email-form {
+            display: flex;
+            gap: 10px;
+            max-width: 500px;
+        }
+        
+        .email-input {
+            flex: 1;
+            padding: 15px;
+            background-color: rgba(0,0,0,0.7);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 4px;
+            color: var(--netflix-white);
+            font-size: 16px;
+        }
+        
+        .email-input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 120px;
+        }
+        
+        .language-btn {
+            background-color: rgba(0,0,0,0.7);
+            color: var(--netflix-white);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            gap: 20px;
+            padding: 0 4%;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--netflix-gray);
+        }
+        
+        .category-tab {
+            padding: 15px 0;
+            background: none;
+            border: none;
+            color: var(--netflix-light-gray);
+            font-size: 16px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .category-tab.active {
+            color: var(--netflix-white);
+        }
+        
+        .category-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--netflix-red);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo">
+                <svg width="134" height="36" viewBox="0 0 111 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M105.062 14.28L111 30c-1.75-.25-3.499-.563-5.28-.845l-3.345-8.686-3.437 7.969c-1.687-.282-3.344-.376-5.031-.595l6.031-13.75L94.468 0h5.063l3.062 7.874L105.875 0h5.124l-5.937 14.28zM90.47 0h-4.594v27.25c1.5.094 3.062.156 4.594.343V0zm-8.563 26.937c-4.187-.281-8.375-.53-12.656-.625V0h4.687v21.875c2.688.062 5.375.28 7.969.405v4.657zM64.25 10.657v4.687h-6.406V26H53.22V0h13.125v4.687h-8.5v5.97h6.406zm-18.906-5.97V26.25c-1.563 0-3.156 0-4.688.062V4.687h-4.844V0h14.406v4.687h-4.874zM30.75 15.593c-2.062 0-4.5 0-6.25.095v6.968c2.75-.188 5.5-.406 8.281-.5v4.5l-12.968 1.032V0H32.78v4.687H24.5v5.967c2.281 0 4.562-.063 6.25-.063v5.002zM4.78 0v27.25c-1.5.094-3 .156-4.5.25V0h4.5z" fill="#e50914"/>
+                </svg>
+            </div>
+            
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="tv-shows.html">TV Shows</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="browse.html">New & Popular</a></li>
+                    <li><a href="my-list.html">My List</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-right">
+                <div class="language-selector">
+                    <button class="language-btn">
+                        <i class="fas fa-globe"></i>
+                        <span>English</span>
+                        <i class="fas fa-caret-down"></i>
+                    </button>
+                </div>
+                <div class="search-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="profile-menu">
+                    <img src="https://i.pravatar.cc/32?img=1" alt="Profile" class="profile-avatar">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1925&q=80" alt="Hero Background" class="hero-bg">
+        <div class="hero-content">
+            <h1 class="hero-title">Unlimited movies, TV shows and more.</h1>
+            <p class="hero-description">Watch anywhere. Cancel anytime.</p>
+            <p class="hero-text">Ready to watch? Enter your email to create or restart your membership.</p>
+            <form class="email-form">
+                <input type="email" class="email-input" placeholder="Email address" required>
+                <button type="submit" class="btn btn-primary btn-lg">Get Started <i class="fas fa-chevron-right"></i></button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Category Tabs -->
+    <div class="category-tabs">
+        <button class="category-tab active">Trending Now</button>
+        <button class="category-tab">Top Rated</button>
+        <button class="category-tab">Action & Adventure</button>
+        <button class="category-tab">Comedies</button>
+        <button class="category-tab">Horror Movies</button>
+        <button class="category-tab">Romantic Movies</button>
+    </div>
+
+    <!-- Content Rows -->
+    <main class="container">
+        <!-- Trending Now -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">Trending Now</h2>
+                <a href="browse.html" class="see-all">See All</a>
+            </div>
+            <div class="content-row">
+                <div class="content-item">
+                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Movie 1" class="content-poster">
+                    <div class="content-info">
+                        <div class="content-meta">
+                            <span class="match">98% Match</span>
+                            <span>2h 14m</span>
+                            <span>U/A 13+</span>
+                        </div>
+                        <h3 class="content-title">Action Adventure</h3>
+                    </div>
+                </div>
+                
+                <div class="content-item">
+                    <img src="https://images.unsplash.com/photo-1574267432553-4b4628081c31?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Movie 2" class="content-poster">
+                    <div class="content-info">
+                        <div class="content-meta">
+                            <span class="match">95% Match</span>
+                            <span>1h 48m</span>
+                            <span>A</span>
+                        </div>
+                        <h3 class="content-title">Thriller Mystery</h3>
+                    </div>
+                </div>
+                
+                <div class="content-item">
+                    <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Movie 3" class="content-poster">
+                    <div class="content-info">
+                        <div class="content-meta">
+                            <span class="match">92% Match</span>
+                            <span>2h 30m</span>
+                            <span>U/A 13+</span>
+                        </div>
+                        <h3 class="content-title">Sci-Fi Epic</h3>
+                    </div>
+                </div>
+                
+                <div class="content-item">
+                    <img src="https://images.unsplash.com/photo-1531259683007-016a7b628fc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Movie 4" class="content-poster">
+                    <div class="content-info">
+                        <div class="content-meta">
+                            <span class="match">96% Match</span>
+                            <span>1h 55m</span>
+                            <span>U/A 16+</span>
+                        </div>
+                        <h3 class="content-title">Drama Series</h3>
+                    </div>
+                </div>
+                
+                <div class="content-item">
+                    <img src="https://images.unsplash.com/photo-1489599809516-9827b6d1cf13?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Movie 5" class="content-poster">
+                    <div class="content-info">
+                        <div class="content-meta">
+                            <span class="match">94% Match</span>
+                            <span>2h 5m</span>
+                            <span>U/A 13+</span>
+                        </div>
+                        <h3 class="content-title">Romantic Comedy</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular on Netflix -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">Popular on Netflix</h2>
+                <a href="browse.html" class="see-all">See All</a>
+            </div>
+            <div class="content-row">
+                <div class="content-item featured">
+                    <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Featured 1" class="content-poster">
+                    <div class="content-info">
+                        <div class="content-meta">
+                            <span class="match">99% Match</span>
+                            <span>Season 3</span>
+                            <span>U/A 16+</span>
+                        </div>
+                        <h3 class="content-title">Hit Series</h3>
+                    </div>
+                </div>
+                
+                <div class="content-item">
+                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Movie 6" class="content-poster">
+                    <div class="content-info">
+                        <div class="content-meta">
+                            <span class="match">97% Match</span>
+                            <span>2h 22m</span>
+                            <span>A</span>
+                        </div>
+                        <h3 class="content-title">Blockbuster Hit</h3>
+                    </div>
+                </div>
+                
+                <div class="content-item">
+                    <img src="https://images.unsplash.com/photo-1574267432553-4b4628081c31?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Movie 7" class="content-poster">
+                    <div class="content-info">
+                        <div class="content-meta">
+                            <span class="match">93% Match</span>
+                            <span>1h 45m</span>
+                            <span>U/A 13+</span>
+                        </div>
+                        <h3 class="content-title">Suspense Thriller</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Continue Watching -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">Continue Watching for Rahul</h2>
+                <a href="my-list.html" class="see-all">See All</a>
+            </div>
+            <div class="content-row">
+                <div class="content-item">
+                    <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Continue 1" class="content-poster">
+                    <div class="content-info">
+                        <div class="content-meta">
+                            <span>45% watched</span>
+                            <span>Episode 5</span>
+                        </div>
+                        <h3 class="content-title">Sci-Fi Series</h3>
+                    </div>
+                </div>
+                
+                <div class="content-item">
+                    <img src="https://images.unsplash.com/photo-1531259683007-016a7b628fc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Continue 2" class="content-poster">
+                    <div class="content-info">
+                        <div class="content-meta">
+                            <span>30% watched</span>
+                            <span>Episode 3</span>
+                        </div>
+                        <h3 class="content-title">Drama Series</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- My List -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">My List</h2>
+                <a href="my-list.html" class="see-all">See All</a>
+            </div>
+            <div class="content-row">
+                <div class="content-item">
+                    <img src="https://images.unsplash.com/photo-1489599809516-9827b6d1cf13?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="List 1" class="content-poster">
+                    <div class="content-info">
+                        <div class="content-meta">
+                            <span class="match">96% Match</span>
+                            <span>2h 10m</span>
+                        </div>
+                        <h3 class="content-title">Romantic Drama</h3>
+                    </div>
+                </div>
+                
+                <div class="content-item">
+                    <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="List 2" class="content-poster">
+                    <div class="content-info">
+                        <div class="content-meta">
+                            <span class="match">98% Match</span>
+                            <span>Season 2</span>
+                        </div>
+                        <h3 class="content-title">Crime Series</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <a href="#">FAQ</a>
+                        <a href="#">Investor Relations</a>
+                        <a href="#">Privacy</a>
+                        <a href="#">Speed Test</a>
+                    </div>
+                    <div class="footer-column">
+                        <a href="#">Help Centre</a>
+                        <a href="#">Jobs</a>
+                        <a href="#">Cookie Preferences</a>
+                        <a href="#">Legal Notices</a>
+                    </div>
+                    <div class="footer-column">
+                        <a href="#">Account</a>
+                        <a href="#">Ways to Watch</a>
+                        <a href="#">Corporate Information</a>
+                        <a href="#">Only on Netflix</a>
+                    </div>
+                    <div class="footer-column">
+                        <a href="#">Media Centre</a>
+                        <a href="#">Terms of Use</a>
+                        <a href="#">Contact Us</a>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>Netflix India</p>
+                    <p>© 2023 Netflix Clone. This is a practice project for educational purposes.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Content Details -->
+    <div id="contentModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Movie" class="modal-poster">
+            <div class="modal-info">
+                <h2 class="modal-title">Movie Title</h2>
+                <div class="modal-details">
+                    <span class="match">98% Match</span>
+                    <span>2023</span>
+                    <span>2h 14m</span>
+                    <span>U/A 13+</span>
+                </div>
+                <p class="modal-description">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-play"></i> Play
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-plus"></i> My List
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
